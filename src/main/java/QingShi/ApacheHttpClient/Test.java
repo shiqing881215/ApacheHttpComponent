@@ -1,11 +1,18 @@
 package QingShi.ApacheHttpClient;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.http.HttpEntity;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
 /**
@@ -22,7 +29,7 @@ public class Test {
 		CloseableHttpClient httpclient = HttpClients.createDefault();
 		// HTTP GET METHOD
         try {
-            HttpGet httpGet = new HttpGet("https://www.google.com/#newwindow=1&q=hello");
+            HttpGet httpGet = new HttpGet("http://www.google.com/search?q=httpClient");
             CloseableHttpResponse response1 = httpclient.execute(httpGet);
             // The underlying HTTP connection is still held by the response object
             // to allow the response content to be streamed directly from the network socket.
@@ -45,22 +52,22 @@ public class Test {
                 response1.close();
             }
 
-//            HttpPost httpPost = new HttpPost("http://targethost/login");
-//            List <NameValuePair> nvps = new ArrayList <NameValuePair>();
-//            nvps.add(new BasicNameValuePair("username", "vip"));
-//            nvps.add(new BasicNameValuePair("password", "secret"));
-//            httpPost.setEntity(new UrlEncodedFormEntity(nvps));
-//            CloseableHttpResponse response2 = httpclient.execute(httpPost);
-//
-//            try {
-//                System.out.println(response2.getStatusLine());
-//                HttpEntity entity2 = response2.getEntity();
-//                // do something useful with the response body
-//                // and ensure it is fully consumed
-//                EntityUtils.consume(entity2);
-//            } finally {
-//                response2.close();
-//            }
+            HttpPost httpPost = new HttpPost("https://www.facebook.com/login.php?login_attempt=1");
+            List <NameValuePair> nvps = new ArrayList <NameValuePair>();
+            nvps.add(new BasicNameValuePair("username", "vip"));
+            nvps.add(new BasicNameValuePair("password", "secret"));
+            httpPost.setEntity(new UrlEncodedFormEntity(nvps));
+            CloseableHttpResponse response2 = httpclient.execute(httpPost);
+
+            try {
+                System.out.println(response2.getStatusLine());
+                HttpEntity entity2 = response2.getEntity();
+                // do something useful with the response body
+                // and ensure it is fully consumed
+                EntityUtils.consume(entity2);
+            } finally {
+                response2.close();
+            }
         } finally {
             httpclient.close();
         }
