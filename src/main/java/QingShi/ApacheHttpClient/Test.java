@@ -60,6 +60,13 @@ public class Test {
             CloseableHttpResponse response2 = httpclient.execute(httpPost);
 
             try {
+            	/**
+            	 * For post method, when you hit the right url, it always give you the 200 response code
+            	 * You need to provide the form parameter to login.
+            	 * Even you provide the wrong credential, it still gives the 200
+            	 * But if you provide the right credential, it usually gives you a 302 redirect
+            	 * You can try HttpClientExample with your real google account and see the difference between response status code
+            	 */
                 System.out.println(response2.getStatusLine());
                 HttpEntity entity2 = response2.getEntity();
                 // do something useful with the response body
