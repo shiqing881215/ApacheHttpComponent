@@ -6,7 +6,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.CookieHandler;
 import java.net.CookieManager;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.List;  
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
